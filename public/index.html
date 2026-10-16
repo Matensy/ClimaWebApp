@@ -15,7 +15,6 @@
     <div class="card-body p-4">
       <h1 class="h4 text-center mb-4">🌤️ Previsão do Tempo</h1>
 
-      <!-- Barra de busca -->
       <form id="formBusca" class="d-flex gap-2 mb-3">
         <input
           id="campoCidade"
@@ -27,10 +26,8 @@
         <button type="submit" class="btn btn-primary">Buscar</button>
       </form>
 
-      <!-- Mensagem de erro -->
       <div id="erro" class="alert alert-danger py-2 d-none"></div>
 
-      <!-- Resultado (começa escondido) -->
       <div id="resultado" class="text-center d-none">
         <h2 id="nomeCidade" class="h5 mb-1"></h2>
         <div id="icone" class="icone-clima"></div>
@@ -48,7 +45,6 @@
           </div>
         </div>
 
-        <!-- Previsão dos próximos 7 dias -->
         <hr class="my-3" />
         <div class="text-muted small text-start mb-2">Próximos 7 dias</div>
         <div id="previsao"></div>

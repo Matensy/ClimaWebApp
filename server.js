@@ -1,19 +1,11 @@
-// server.js
-// Back-end do app de clima.
-// Ele recebe o nome de uma cidade, descobre a localização dela e busca
-// o clima atual na API gratuita Open-Meteo (não precisa de chave/cadastro).
-
 const express = require("express");
 const path = require("path");
 
 const app = express();
 const PORTA = 3000;
 
-// Deixa a pasta "public" acessível (é onde fica o site: HTML, CSS, JS).
 app.use(express.static(path.join(__dirname, "public")));
 
-// Rota que o site chama pra pegar o clima de uma cidade.
-// Exemplo: GET /clima?cidade=Recife
 app.get("/clima", async (req, res) => {
   const cidade = req.query.cidade;
 
@@ -22,7 +14,6 @@ app.get("/clima", async (req, res) => {
   }
 
   try {
-    // 1) Descobre a latitude/longitude da cidade (geocoding).
     const urlGeo =
       "https://geocoding-api.open-meteo.com/v1/search?name=" +
       encodeURIComponent(cidade) +
@@ -37,8 +28,6 @@ app.get("/clima", async (req, res) => {
 
     const local = dadosGeo.results[0];
 
-    // 2) Com a localização, busca o clima atual.
-    // Pedimos o clima de AGORA (current) e a previsão dos próximos 7 dias (daily).
     const urlClima =
       "https://api.open-meteo.com/v1/forecast?latitude=" +
       local.latitude +
@@ -53,15 +42,13 @@ app.get("/clima", async (req, res) => {
     const atual = dadosClima.current;
     const diario = dadosClima.daily;
 
-    // Monta a lista dos 7 dias num formato fácil de usar no site.
     const previsao = diario.time.map((data, i) => ({
-      data: data, // no formato "2026-10-16"
+      data: data,
       maxima: Math.round(diario.temperature_2m_max[i]),
       minima: Math.round(diario.temperature_2m_min[i]),
       codigo: diario.weather_code[i],
     }));
 
-    // 3) Monta a resposta e devolve pro site.
     res.json({
       cidade: local.name,
       pais: local.country,

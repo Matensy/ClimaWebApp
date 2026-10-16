@@ -1,6 +1,3 @@
-/* style.css
-   Deixa o app centralizado, com um fundo bonito. O resto vem do Bootstrap. */
-
 body.tela-centralizada {
   min-height: 100vh;
   display: flex;
@@ -17,19 +14,16 @@ body.tela-centralizada {
   border-radius: 16px;
 }
 
-/* Emoji grande do clima */
 .icone-clima {
   font-size: 64px;
   line-height: 1;
 }
 
-/* Temperatura em destaque */
 .temperatura {
   font-size: 48px;
   font-weight: 700;
 }
 
-/* Lista de 7 dias: deixa as colunas alinhadas */
 .dia-nome {
   width: 48px;
   text-transform: capitalize;
@@ -44,7 +38,6 @@ body.tela-centralizada {
   text-align: right;
 }
 
-/* Linhas da previsão com uma divisória sutil entre elas */
 #previsao > div:not(:last-child) {
   border-bottom: 1px solid #f0f0f0;
 }

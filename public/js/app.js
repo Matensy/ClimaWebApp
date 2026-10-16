@@ -1,9 +1,3 @@
-// app.js
-// Este código roda no navegador. Ele pega a cidade digitada, pede o clima
-// pro nosso back-end (/clima) e mostra o resultado na tela.
-
-// "Dicionário" que transforma o código do tempo (weather_code) em
-// um texto + emoji. A API Open-Meteo usa esses códigos padrão (WMO).
 const CODIGOS = {
   0: ["Céu limpo", "☀️"],
   1: ["Predominantemente limpo", "🌤️"],
@@ -28,48 +22,39 @@ const CODIGOS = {
   99: ["Trovoada forte com granizo", "⛈️"],
 };
 
-// Guarda os elementos da página em variáveis pra facilitar.
 const form = document.getElementById("formBusca");
 const campoCidade = document.getElementById("campoCidade");
 const divErro = document.getElementById("erro");
 const divResultado = document.getElementById("resultado");
 const divPrevisao = document.getElementById("previsao");
 
-// Transforma uma data "2026-10-16" no nome curto do dia (ex: "qui").
 function nomeDoDia(dataTexto) {
   const dias = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
-  // O "T00:00" evita problemas de fuso ao criar a data.
   const d = new Date(dataTexto + "T00:00");
   return dias[d.getDay()];
 }
 
-// Quando o formulário é enviado...
 form.addEventListener("submit", async (evento) => {
-  evento.preventDefault(); // evita recarregar a página
+  evento.preventDefault();
 
   const cidade = campoCidade.value.trim();
   if (!cidade) return;
 
-  // Esconde resultado e erro antigos.
   divResultado.classList.add("d-none");
   divErro.classList.add("d-none");
 
   try {
-    // Chama o nosso back-end.
     const resposta = await fetch("/clima?cidade=" + encodeURIComponent(cidade));
     const dados = await resposta.json();
 
-    // Se deu erro (cidade não achada, etc.), mostra a mensagem.
     if (!resposta.ok) {
       divErro.textContent = dados.erro || "Algo deu errado.";
       divErro.classList.remove("d-none");
       return;
     }
 
-    // Descobre o texto e o emoji a partir do código do tempo.
     const info = CODIGOS[dados.codigo] || ["Clima", "🌡️"];
 
-    // Preenche a tela com os dados.
     document.getElementById("nomeCidade").textContent =
       dados.cidade + ", " + dados.pais;
     document.getElementById("icone").textContent = info[1];
@@ -78,11 +63,9 @@ form.addEventListener("submit", async (evento) => {
     document.getElementById("umidade").textContent = dados.umidade + "%";
     document.getElementById("vento").textContent = dados.vento + " km/h";
 
-    // Monta a lista dos próximos 7 dias.
     divPrevisao.innerHTML = "";
     dados.previsao.forEach((dia, i) => {
       const infoDia = CODIGOS[dia.codigo] || ["Clima", "🌡️"];
-      // O primeiro item é hoje; mostramos "Hoje" em vez do nome do dia.
       const rotulo = i === 0 ? "Hoje" : nomeDoDia(dia.data);
 
       const linha = document.createElement("div");

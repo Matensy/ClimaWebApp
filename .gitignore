@@ -1,0 +1,10 @@
+# Dependências do Node (NUNCA suba essa pasta no GitHub)
+node_modules/
+
+# Arquivos de ambiente / logs
+.env
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

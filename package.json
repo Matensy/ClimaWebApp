@@ -1,0 +1,23 @@
+{
+  "name": "clima-web-app",
+  "version": "1.0.0",
+  "description": "App de previsão do tempo feito com Node.js (Express) + Bootstrap 5",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "clima",
+    "tempo",
+    "weather",
+    "express",
+    "bootstrap",
+    "iniciante"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

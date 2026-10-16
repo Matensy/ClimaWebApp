@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clima Web App</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link href="/css/style.css" rel="stylesheet" />
+</head>
+<body class="tela-centralizada">
+  <div class="card cartao shadow-sm">
+    <div class="card-body p-4">
+      <h1 class="h4 text-center mb-4">🌤️ Previsão do Tempo</h1>
+
+      <!-- Barra de busca -->
+      <form id="formBusca" class="d-flex gap-2 mb-3">
+        <input
+          id="campoCidade"
+          type="text"
+          class="form-control"
+          placeholder="Digite uma cidade..."
+          required
+        />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </form>
+
+      <!-- Mensagem de erro -->
+      <div id="erro" class="alert alert-danger py-2 d-none"></div>
+
+      <!-- Resultado (começa escondido) -->
+      <div id="resultado" class="text-center d-none">
+        <h2 id="nomeCidade" class="h5 mb-1"></h2>
+        <div id="icone" class="icone-clima"></div>
+        <div id="condicao" class="text-muted mb-2"></div>
+        <div id="temperatura" class="temperatura"></div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <div class="text-muted small">Umidade</div>
+            <div id="umidade" class="fw-bold"></div>
+          </div>
+          <div class="col-6">
+            <div class="text-muted small">Vento</div>
+            <div id="vento" class="fw-bold"></div>
+          </div>
+        </div>
+
+        <!-- Previsão dos próximos 7 dias -->
+        <hr class="my-3" />
+        <div class="text-muted small text-start mb-2">Próximos 7 dias</div>
+        <div id="previsao"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
